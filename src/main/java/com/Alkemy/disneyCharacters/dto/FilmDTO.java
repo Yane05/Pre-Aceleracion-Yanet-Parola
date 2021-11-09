@@ -16,6 +16,6 @@ public class FilmDTO {
     private String title;
     private String creationDate;
     private Integer qualification;
-    private List<GenreEntity> genres;
-    private List<CharacterEntity> characters;
+    private List<GenreDTO> genres;
+    private List<CharacterDTO> characters;
 }

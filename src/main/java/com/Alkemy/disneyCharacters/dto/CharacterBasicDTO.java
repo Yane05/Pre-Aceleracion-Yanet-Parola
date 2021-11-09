@@ -8,9 +8,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class GenreDTO {
+public class CharacterBasicDTO {
     private Long id;
-    private String name;
     private String image;
-    private List<FilmDTO> films;
+    private String name;
 }

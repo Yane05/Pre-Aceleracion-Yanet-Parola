@@ -2,8 +2,9 @@ package com.Alkemy.disneyCharacters.repository;
 
 import com.Alkemy.disneyCharacters.entity.CharacterEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CharacterRepository extends JpaRepository<CharacterEntity, Long> {
+public interface CharacterRepository extends JpaRepository<CharacterEntity, Long>, JpaSpecificationExecutor<CharacterEntity> {
 }

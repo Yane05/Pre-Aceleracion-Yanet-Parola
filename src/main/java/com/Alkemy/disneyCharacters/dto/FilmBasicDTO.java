@@ -1,6 +1,5 @@
 package com.Alkemy.disneyCharacters.dto;
 
-import com.Alkemy.disneyCharacters.entity.FilmEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,9 +7,10 @@ import java.util.List;
 
 @Getter
 @Setter
-public class GenreDTO {
+
+public class FilmBasicDTO {
     private Long id;
-    private String name;
     private String image;
-    private List<FilmDTO> films;
+    private String title;
+    private String creationDate;
 }
