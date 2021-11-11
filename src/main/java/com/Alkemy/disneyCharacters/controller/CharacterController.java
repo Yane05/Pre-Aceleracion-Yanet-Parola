@@ -33,7 +33,7 @@ public class CharacterController {
         return ResponseEntity.status(HttpStatus.CREATED).body(characterSaved);
     }
 
-    @GetMapping("/characters")
+    @GetMapping("/all")
     public ResponseEntity<List<CharacterBasicDTO>> getAll() {
         List<CharacterBasicDTO> character = characterService.getAllIcons();
         return ResponseEntity.ok().body(character);
@@ -49,7 +49,7 @@ public class CharacterController {
     public ResponseEntity<List<CharacterDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
             @RequestParam (required = false) Integer age,
-            @RequestParam (required = false) Long idFilm
+            @RequestParam (required = false) Set<Long> idFilm
     ){
         List<CharacterDTO> characters = characterService.getByFilters(name,age,idFilm);
         return ResponseEntity.ok(characters);

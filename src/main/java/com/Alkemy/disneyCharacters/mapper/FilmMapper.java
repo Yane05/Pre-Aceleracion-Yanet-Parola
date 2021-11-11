@@ -90,6 +90,7 @@ public class FilmMapper {
             basicDTO.setImage(entity.getImage());
             basicDTO.setTitle(entity.getTitle());
             basicDTO.setCreationDate(entity.getCreationDate().toString());
+            dtos.add(basicDTO);
         }
         return dtos;
     }

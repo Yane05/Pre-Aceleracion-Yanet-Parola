@@ -4,6 +4,7 @@ import com.Alkemy.disneyCharacters.dto.CharacterBasicDTO;
 import com.Alkemy.disneyCharacters.dto.CharacterDTO;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CharacterService {
 
@@ -17,5 +18,5 @@ public interface CharacterService {
 
     CharacterDTO update(Long id, CharacterDTO characterDTO);
 
-    List<CharacterDTO> getByFilters(String name, Integer age, Long idFilm);
+    List<CharacterDTO> getByFilters(String name, Integer age, Set<Long> idFilm);
 }

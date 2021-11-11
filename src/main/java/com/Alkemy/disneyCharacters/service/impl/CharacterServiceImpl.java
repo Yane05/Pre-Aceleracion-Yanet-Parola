@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
@@ -26,9 +27,9 @@ public class CharacterServiceImpl implements CharacterService {
     private CharacterSpecification characterSpecification;
 
     public CharacterDTO save (CharacterDTO dto){
-        CharacterEntity entity = characterMapper.characterDTO2Entity(dto, true);
+        CharacterEntity entity = characterMapper.characterDTO2Entity(dto, false);
         CharacterEntity entitySaved = characterRepository.save(entity);
-        CharacterDTO result = characterMapper.characterEntity2DTO(entitySaved, true);
+        CharacterDTO result = characterMapper.characterEntity2DTO(entitySaved, false);
         return result;
     }
 
@@ -57,7 +58,7 @@ public class CharacterServiceImpl implements CharacterService {
         return result;
     }
 
-    public List<CharacterDTO> getByFilters(String name, Integer age, Long idFilm) {
+    public List<CharacterDTO> getByFilters(String name, Integer age, Set<Long> idFilm) {
         CharacterFiltersDTO filtersDTO = new CharacterFiltersDTO(name, age, idFilm);
         List<CharacterEntity> entities = characterRepository.findAll(characterSpecification.getByFilters(filtersDTO));
         List<CharacterDTO> dtos = characterMapper.characterEntityList2DTOList(entities, true);

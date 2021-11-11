@@ -21,16 +21,16 @@ public class FilmSpecification {
     public Specification<FilmEntity> getByFilters(FilmFiltersDTO filtersDTO) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            if (StringUtils.hasLength(filtersDTO.getName())) {
+            if (StringUtils.hasLength(filtersDTO.getTitle())) {
                 predicates.add(
                         criteriaBuilder.like(
-                                criteriaBuilder.lower(root.get("name")),
-                                "%" + filtersDTO.getName().toLowerCase() + "%"
+                                criteriaBuilder.lower(root.get("title")),
+                                "%" + filtersDTO.getTitle().toLowerCase() + "%"
                         )
                 );
             }
             if (!ObjectUtils.isEmpty(filtersDTO.getIdGenre())) {
-                Join<GenreEntity, FilmEntity> join = root.join("genres", JoinType.INNER);
+                Join<FilmEntity, GenreEntity> join = root.join("genres", JoinType.INNER);
                 Expression<String> idGenre = join.get("id");
                 predicates.add(idGenre.in(filtersDTO.getIdGenre()));
             }
@@ -38,7 +38,7 @@ public class FilmSpecification {
             query.distinct(true);
 
             //orden
-            String orderByField = "name";
+            String orderByField = "title";
             query.orderBy(
                     filtersDTO.isASC() ?
                             criteriaBuilder.asc(root.get(orderByField)) :

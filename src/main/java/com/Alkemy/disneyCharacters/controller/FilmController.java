@@ -1,6 +1,5 @@
 package com.Alkemy.disneyCharacters.controller;
 
-import com.Alkemy.disneyCharacters.dto.CharacterDTO;
 import com.Alkemy.disneyCharacters.dto.FilmBasicDTO;
 import com.Alkemy.disneyCharacters.dto.FilmDTO;
 import com.Alkemy.disneyCharacters.service.FilmService;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("films")
@@ -28,16 +28,17 @@ public class FilmController {
     private FilmService filmService;
 
     @PostMapping
-    public ResponseEntity<FilmDTO> save (@RequestBody FilmDTO film){
+    public ResponseEntity<FilmDTO> save(@RequestBody FilmDTO film) {
         FilmDTO filmSaved = filmService.save(film);
         return ResponseEntity.status(HttpStatus.CREATED).body(filmSaved);
     }
 
-    @GetMapping("/films")
+    @GetMapping("/all")
     public ResponseEntity<List<FilmBasicDTO>> getAll() {
         List<FilmBasicDTO> films = filmService.getAllFilms();
         return ResponseEntity.ok().body(films);
     }
+
     @GetMapping("/detailed")
     public ResponseEntity<List<FilmDTO>> getAllDetailed() {
         List<FilmDTO> films = filmService.getAllFilmsDetailed();
@@ -46,12 +47,11 @@ public class FilmController {
 
     @GetMapping
     public ResponseEntity<List<FilmDTO>> getDetailsByFilters(
-            @RequestParam(required = false) String name,
-            @RequestParam (required = false) Long idGenre,
-            @RequestParam (required = false, defaultValue = "ASC") String order
-
-    ){
-        List<FilmDTO> films = filmService.getByFilters(name,idGenre,order);
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Set<Long> idGenre,
+            @RequestParam(required = false, defaultValue = "ASC") String order
+    ) {
+        List<FilmDTO> films = filmService.getByFilters(title, idGenre, order);
         return ResponseEntity.ok(films);
     }
 
